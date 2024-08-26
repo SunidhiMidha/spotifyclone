@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Login from "./Login/Login";
+import Login from "./Components/Login/Login";
 import { getTokenFromUrl } from "./Config/spotify";
 import SpotifyWebApi from "spotify-web-api-js";
 import { useDataLayerValue } from "./React Context API/DataLayer";

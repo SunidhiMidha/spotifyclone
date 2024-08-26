@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Body.css";
 import Header from "./Header";
 import { useDataLayerValue } from "../../React Context API/DataLayer";
 import { PlayCircleFilled, Favorite, MoreHoriz } from "@mui/icons-material";
 import SongRow from "./SongRow";
 
-function Body({ webapi, setCurrentTrack, handlePlayPause }) {
+function Body({ webapi, handlePlayPause, setTrackList }) {
   const [{ discover_weekly }, dispatch] = useDataLayerValue();
+
+  useEffect(() => {
+    if (
+      Array.isArray(discover_weekly?.tracks?.items) &&
+      !!discover_weekly.tracks.items.length
+    )
+      typeof setTrackList == "function" &&
+        setTrackList(discover_weekly.tracks.items);
+  }, [discover_weekly]);
 
   return (
     <div className="body">
@@ -25,13 +34,15 @@ function Body({ webapi, setCurrentTrack, handlePlayPause }) {
           <Favorite fontSize="large" />
           <MoreHoriz />
         </div>
-        {Array.isArray(discover_weekly?.tracks?.items) && !!discover_weekly.tracks.items.length && discover_weekly.tracks.items.map((item, index) => (
-          <SongRow
-            track={item.track}
-            key={index}
-            handlePlayPause={() => handlePlayPause(item.track)}
-          />
-        ))}
+        {Array.isArray(discover_weekly?.tracks?.items) &&
+          !!discover_weekly.tracks.items.length &&
+          discover_weekly.tracks.items.map((item, index) => (
+            <SongRow
+              track={item.track}
+              key={index}
+              handlePlayPause={() => handlePlayPause(item.track)}
+            />
+          ))}
       </div>
     </div>
   );
