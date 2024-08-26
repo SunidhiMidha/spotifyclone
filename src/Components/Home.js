@@ -23,7 +23,7 @@ function Home({ webapi }) {
   const playFirstTrack = () => {
     if (!currentTrack) {
       const track = trackList?.[0]?.track || null;
-      audioRef.current.src = track.preview_url;
+      audioRef.current.src = track?.preview_url;
       audioRef.current.play();
       setCurrentTrack(track);
       setIsPlaying(true);

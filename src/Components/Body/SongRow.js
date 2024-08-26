@@ -2,6 +2,10 @@ import React from "react";
 import "./SongRow.css";
 import formatDuration from "../../Helpers/Helpers";
 import AudioBars from "../../Helpers/AudioBars";
+import { FileDownloadOutlined } from "@mui/icons-material";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../../index.css";
 
 function SongRow({ track, index, currentTrack, isPlaying, handlePlayPause }) {
   const { name, album, duration_ms, artists } = track || {};
@@ -9,6 +13,39 @@ function SongRow({ track, index, currentTrack, isPlaying, handlePlayPause }) {
   let curr = false
   if(currentTrack?.id == track?.id) {
     curr = true;
+  }
+
+  const downloadSong = async (e) =>{
+    e.preventDefault();
+    e.stopPropagation();
+    const url = track?.preview_url;
+    try {
+      if(!url) throw new Error("URL not found.")
+      const response = await fetch(url, {
+        mode: 'cors'
+      });
+  
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+  
+      const blob = await response.blob();
+      const urlObject = URL.createObjectURL(blob);
+  
+      const a = document.createElement('a');
+      a.href = urlObject;
+      a.download = track?.name || 'song.mp3';
+      document.body.appendChild(a);
+      a.click();
+  
+      document.body.removeChild(a);
+      URL.revokeObjectURL(urlObject);
+    } catch (error) {
+      toast.error("Couldn't download file. Please try again later.", {
+        autoClose: 2000,
+        hideProgressBar: true,
+      })
+    }
   }
 
   return (
@@ -31,6 +68,7 @@ function SongRow({ track, index, currentTrack, isPlaying, handlePlayPause }) {
                 <p> {"Duration"}</p>
               </div>
             </div>
+            <div className="download_icon"/>
           </div>
           <div
             style={{ height: 1, backgroundColor: "#b3b3b3", opacity: 0.5 }}
@@ -73,6 +111,7 @@ function SongRow({ track, index, currentTrack, isPlaying, handlePlayPause }) {
             <p> {formatDuration(duration_ms)}</p>
           </div>
         </div>
+        <FileDownloadOutlined className="download_icon" onClick={downloadSong}/>
       </div>
     </>
   );
