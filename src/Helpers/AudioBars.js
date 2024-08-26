@@ -4,7 +4,7 @@ import './AudioBars.css';
 
 const AudioBars = () => {
   return (
-    <Box display="flex" alignItems="center" style={{marginRight: 12, alignSelf: 'center', marginLeft: -7}}>
+    <Box display="flex" alignItems="center">
       <Box className="bar" />
       <Box className="bar" />
       <Box className="bar" />

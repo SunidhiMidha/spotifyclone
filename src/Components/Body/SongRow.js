@@ -44,7 +44,7 @@ function SongRow({ track, index, currentTrack, isPlaying, handlePlayPause }) {
         key={index + name}
       >
         <div className="songRow__horizontal">
-          {!!curr && !!isPlaying ? <AudioBars/> : <div className="songRow__no" style={curr ? {color: "#1ed15e", opacity: 1} : {}}>{index}</div>}
+          <div style={{width: 32}}>{!!curr && !!isPlaying ? <AudioBars/> : <div className="songRow__no" style={curr ? {color: "#1ed15e", opacity: 1} : {}}>{index}</div>}</div>
           <img
             src={
               album?.images[0]?.url ||
