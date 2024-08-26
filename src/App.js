@@ -21,19 +21,17 @@ function App() {
         token: _token,
       });
       webapi.setAccessToken(_token);
-      webapi.getMe().then((user) => { //returns user details
-        console.log(">>user",user)
+      webapi.getMe().then((user) => {
         dispatch({
           type: "SET_USER",
           user,
         });
       });
-      webapi.getUserPlaylists().then((playlists) => { //not returning playlists as of now, but returning a href. check if we can access that
-        dispatch({
-          type: "SET_PLAYLISTS",
-          playlists,
-        });
-      });
+      // webapi.getUserPlaylists().then((playlists) => {
+      //     type: "SET_PLAYLISTS",
+      //     playlists,
+      //   });
+      // });
       webapi.getPlaylist("37i9dQZF1E34Ucml4HHx1w").then((playlist) => {
         dispatch({
           type: "SET_DISCOVER_WEEKLY",
@@ -42,10 +40,6 @@ function App() {
       });
     }
   }, []);
-
-  // useEffect(() => {
-  //   console.log(">>useeffect user", user)
-  // }, [user])
 
   return (
     <div className="App">
