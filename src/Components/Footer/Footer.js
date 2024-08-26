@@ -17,8 +17,14 @@ function Footer({
   isPlaying,
   handlePlayPause,
   handleNext,
-  handlePrevious
+  handlePrevious,
+  setVolume,
+  volume
 }) {
+  const handleVolumeChange = (event, newValue) => {
+    typeof setVolume == "function" && setVolume(newValue);
+  };
+
   return (
     <div className="footer">
       <div className="footer__left">
@@ -36,13 +42,13 @@ function Footer({
         <Shuffle className="footer__green" />
         <SkipPrevious className="footer__icon" onClick={handlePrevious} />
         {isPlaying ? <PauseCircleOutline
-          fontSize="large"
-          className="footer__icon"
-          onClick={() => handlePlayPause(currentTrack)}
+            fontSize="large"
+            className="footer__icon"
+            onClick={() => handlePlayPause(currentTrack)}
         /> : <PlayCircleOutline
-          fontSize="large"
-          className="footer__icon"
-          onClick={() => handlePlayPause(currentTrack)}
+            fontSize="large"
+            className="footer__icon"
+            onClick={() => handlePlayPause(currentTrack)}
         />}
         <SkipNext className="footer__icon" onClick={handleNext} />
         <Repeat className="footer__green" />
@@ -56,7 +62,11 @@ function Footer({
             <VolumeDown />
           </Grid>
           <Grid item xs>
-            <Slider />
+            <Slider
+              value={volume}
+              onChange={handleVolumeChange}
+              aria-labelledby="continuous-slider"
+            />
           </Grid>
         </Grid>
       </div>

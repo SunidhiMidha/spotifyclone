@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Home.css";
 import Sidebar from "./SideBar/Sidebar";
 import Body from "./Body/Body";
@@ -10,11 +10,16 @@ import "../index.css";
 function Home({ webapi }) {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [trackList, setTrackList] = useState(null);
+  const [trackList, setTrackList] = useState([]);
+  const [volume, setVolume] = useState(50);
   const audioRef = useRef(new Audio());
 
+  useEffect(() => {
+    audioRef.current.volume = volume / 100;
+  }, [volume]);
+
   const showErrorToast = () => {
-    toast.error("Play url not found", {
+    toast.error("Play URL not found", {
       autoClose: 2000,
       hideProgressBar: true,
     });
@@ -23,10 +28,14 @@ function Home({ webapi }) {
   const playFirstTrack = () => {
     if (!currentTrack) {
       const track = trackList?.[0]?.track || null;
-      audioRef.current.src = track?.preview_url;
-      audioRef.current.play();
-      setCurrentTrack(track);
-      setIsPlaying(true);
+      if (track?.preview_url) {
+        audioRef.current.src = track.preview_url;
+        audioRef.current.play();
+        setCurrentTrack(track);
+        setIsPlaying(true);
+      } else {
+        showErrorToast();
+      }
     } else if (!!audioRef?.current?.paused) {
       audioRef.current.play();
       setIsPlaying(true);
@@ -125,7 +134,8 @@ function Home({ webapi }) {
         handlePlayPause={handlePlayPause}
         handleNext={handleNext}
         handlePrevious={handlePrevious}
-        audioRef={audioRef}
+        setVolume={setVolume}
+        volume={volume}
       />
     </div>
   );
