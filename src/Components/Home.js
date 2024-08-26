@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import "./Player.css";
+import "./Home.css";
 import Sidebar from "./SideBar/Sidebar";
 import Body from "./Body/Body";
 import Footer from "./Footer/Footer";
@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../index.css";
 
-function Player({ webapi }) {
+function Home({ webapi }) {
   const [currentTrack, setCurrentTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackList, setTrackList] = useState(null);
@@ -107,8 +107,8 @@ function Player({ webapi }) {
   };
 
   return (
-    <div className="player">
-      <div className="player__body">
+    <div className="home">
+      <div className="home__body">
         <Sidebar />
         <Body
           webapi={webapi}
@@ -129,4 +129,4 @@ function Player({ webapi }) {
   );
 }
 
-export default Player;
+export default Home;

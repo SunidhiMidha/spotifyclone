@@ -1,28 +1,56 @@
 .songRow {
-  margin-left: 20px;
-  padding: 20px;
+  padding: 16px 32px;
   display: flex;
   align-items: center;
   z-index: 100;
   color: white;
 }
+
 .songRow:hover {
   cursor: pointer;
   background-color: black;
   opacity: 0.8;
 }
-.songRow__info {
-  margin-left: 20px;
+
+.songRow__horizontal {
+  display: flex;
+  align-items: center;
+  flex: 1;
 }
+
+.songRow__no {
+  font-size: 14px;
+  margin-top: 3px;
+  color: "#b3b3b3";
+  text-align: left;
+  opacity: 0.6;
+  margin-right: 12px;
+}
+
+.songRow__info {
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: white;
+}
+
 .songRow__info > h1 {
   font-size: 16px;
+  text-align: left;
 }
+
 .songRow__info > p {
   font-size: 14px;
   margin-top: 3px;
-  color: gray;
+  color: "#b3b3b3";
+  text-align: left;
+  opacity: 0.6;
 }
+
 .songRow__album {
   height: 40px;
   width: 40px;
+  border-radius: 4px;
+  background-color: white;
 }

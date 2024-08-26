@@ -40,6 +40,7 @@ function Body({ webapi, handlePlayPause, setTrackList, playFirstTrack }) {
             <SongRow
               track={item.track}
               key={index}
+              index={index+1}
               handlePlayPause={() => handlePlayPause(item.track)}
             />
           ))}

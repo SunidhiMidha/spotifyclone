@@ -4,7 +4,7 @@ import Login from "./Components/Login/Login";
 import { getTokenFromUrl } from "./Config/spotify";
 import SpotifyWebApi from "spotify-web-api-js";
 import { useDataLayerValue } from "./React Context API/DataLayer";
-import Player from "./Components/Player";
+import Home from "./Components/Home";
 import { ToastContainer } from "react-toastify";
 const webapi = new SpotifyWebApi();
 
@@ -49,7 +49,7 @@ function App() {
 
   return (
     <div className="App">
-      {!!token ? <Player webapi={webapi} /> : <Login />}
+      {!!token ? <Home webapi={webapi} /> : <Login />}
       <ToastContainer />
     </div>
   );

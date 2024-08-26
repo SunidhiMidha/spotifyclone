@@ -42,12 +42,22 @@
 .footer__green {
   color: #1ed15e;
 }
+.footer__songInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 .footer__songInfo > h4 {
   margin-bottom: 5px;
+  text-align: left;
 }
+
 .footer__songInfo > p {
   font-size: 12px;
+  text-align: left;
 }
+
 .footer__icon:hover,
 .footer__green:hover {
   transition: transform 0.2 ease-in;
