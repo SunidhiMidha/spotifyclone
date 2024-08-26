@@ -5,7 +5,7 @@ import { useDataLayerValue } from "../../React Context API/DataLayer";
 import { PlayCircleFilled, Favorite, MoreHoriz } from "@mui/icons-material";
 import SongRow from "./SongRow";
 
-function Body({ webapi, handlePlayPause, setTrackList, playFirstTrack }) {
+function Body({ webapi, handlePlayPause, setTrackList, playFirstTrack, currentTrack, isPlaying }) {
   const [{ discover_weekly }, dispatch] = useDataLayerValue();
 
   useEffect(() => {
@@ -42,6 +42,8 @@ function Body({ webapi, handlePlayPause, setTrackList, playFirstTrack }) {
               key={index}
               index={index+1}
               handlePlayPause={() => handlePlayPause(item.track)}
+              currentTrack={currentTrack}
+              isPlaying={isPlaying}
             />
           ))}
       </div>

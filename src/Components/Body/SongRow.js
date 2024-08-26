@@ -1,9 +1,15 @@
 import React from "react";
 import "./SongRow.css";
-import formatDuration from "../../Helpers";
+import formatDuration from "../../Helpers/Helpers";
+import AudioBars from "../../Helpers/AudioBars";
 
-function SongRow({ track, index, isPlaying, handlePlayPause }) {
+function SongRow({ track, index, currentTrack, isPlaying, handlePlayPause }) {
   const { name, album, duration_ms, artists } = track || {};
+
+  let curr = false
+  if(currentTrack?.id == track?.id) {
+    curr = true;
+  }
 
   return (
     <>
@@ -33,12 +39,12 @@ function SongRow({ track, index, isPlaying, handlePlayPause }) {
       )}
 
       <div
-        className={`songRow ${isPlaying ? "playing" : ""}`}
+        className={`songRow`}
         onClick={handlePlayPause}
         key={index + name}
       >
         <div className="songRow__horizontal">
-          <div className="songRow__no">{index}</div>
+          {!!curr && !!isPlaying ? <AudioBars/> : <div className="songRow__no" style={curr ? {color: "#1ed15e", opacity: 1} : {}}>{index}</div>}
           <img
             src={
               album?.images[0]?.url ||
@@ -48,7 +54,7 @@ function SongRow({ track, index, isPlaying, handlePlayPause }) {
             className="songRow__album"
           />
           <div className="songRow__info">
-            <h1>{name}</h1>
+            <h1 style={curr ? {color: "#1ed15e"} : {}}>{name}</h1>
             <p>
               {Array.isArray(artists) &&
                 !!artists &&

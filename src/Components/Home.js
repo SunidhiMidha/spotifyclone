@@ -115,6 +115,8 @@ function Home({ webapi }) {
           handlePlayPause={handlePlayPause}
           setTrackList={setTrackList}
           playFirstTrack={playFirstTrack}
+          currentTrack={currentTrack}
+          isPlaying={isPlaying}
         />
       </div>
       <Footer
