@@ -36,6 +36,8 @@
   width: 60px;
   margin-right: 20px;
   object-fit: contain;
+  background-color: white;
+  border-radius: 6px;
 }
 .footer__green {
   color: #1ed15e;

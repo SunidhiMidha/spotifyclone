@@ -5,7 +5,7 @@ import { useDataLayerValue } from "../../React Context API/DataLayer";
 import { PlayCircleFilled, Favorite, MoreHoriz } from "@mui/icons-material";
 import SongRow from "./SongRow";
 
-function Body({ webapi, handlePlayPause, setTrackList }) {
+function Body({ webapi, handlePlayPause, setTrackList, playFirstTrack }) {
   const [{ discover_weekly }, dispatch] = useDataLayerValue();
 
   useEffect(() => {
@@ -30,7 +30,7 @@ function Body({ webapi, handlePlayPause, setTrackList }) {
       </div>
       <div className="body__songs">
         <div className="body__icons">
-          <PlayCircleFilled className="body__shuffle" />
+          <PlayCircleFilled className="body__shuffle" onClick={typeof playFirstTrack == "function" && playFirstTrack}/>
           <Favorite fontSize="large" />
           <MoreHoriz />
         </div>

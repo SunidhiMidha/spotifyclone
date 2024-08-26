@@ -26,7 +26,6 @@ function Footer({
           src={currentTrack?.album.images[0]?.url || require("../../Images/footer_placeholder.png")}
           alt=""
           className="footer__albumLogo"
-          style={{backgroundColor: "white", height: 60, width: 60, borderRadius: 6}}
         />
         <div className="footer__songInfo">
           <h4>{currentTrack?.name || "No song playing"}</h4>

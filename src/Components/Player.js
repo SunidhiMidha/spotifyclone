@@ -20,6 +20,19 @@ function Player({ webapi }) {
     });
   };
 
+  const playFirstTrack = () => {
+    if (!currentTrack) {
+      const track = trackList?.[0]?.track || null;
+      audioRef.current.src = track.preview_url;
+      audioRef.current.play();
+      setCurrentTrack(track);
+      setIsPlaying(true);
+    } else if (!!audioRef?.current?.paused) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
   const handlePlayPause = (track) => {
     if (!track?.preview_url) {
       showErrorToast();
@@ -101,6 +114,7 @@ function Player({ webapi }) {
           webapi={webapi}
           handlePlayPause={handlePlayPause}
           setTrackList={setTrackList}
+          playFirstTrack={playFirstTrack}
         />
       </div>
       <Footer
