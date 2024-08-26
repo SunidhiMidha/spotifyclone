@@ -25,7 +25,7 @@ function Body({ webapi, setCurrentTrack, handlePlayPause }) {
           <Favorite fontSize="large" />
           <MoreHoriz />
         </div>
-        {discover_weekly?.tracks.items.map((item, index) => (
+        {Array.isArray(discover_weekly?.tracks?.items) && !!discover_weekly.tracks.items.length && discover_weekly.tracks.items.map((item, index) => (
           <SongRow
             track={item.track}
             key={index}
